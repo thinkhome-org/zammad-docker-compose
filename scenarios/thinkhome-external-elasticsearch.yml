@@ -1,0 +1,26 @@
+---
+# Connect only Zammad application services to the Elasticsearch stack's
+# existing bridge network. Keep their default network for PostgreSQL, Redis,
+# Memcached and the nginx frontend.
+services:
+  zammad-init:
+    networks:
+      - default
+      - thinkhome-elasticsearch
+  zammad-railsserver:
+    networks:
+      - default
+      - thinkhome-elasticsearch
+  zammad-scheduler:
+    networks:
+      - default
+      - thinkhome-elasticsearch
+  zammad-websocket:
+    networks:
+      - default
+      - thinkhome-elasticsearch
+
+networks:
+  thinkhome-elasticsearch:
+    external: true
+    name: elasticsearch
